@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import utils.PropertyReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public abstract class BaseAppTest {
     }
 
     private static void authorization(WebDriver webDriver) throws IOException {
-        Properties appProps = getAppProps();
+        Properties appProps = PropertyReader.readProperties();
         String loginName = appProps.getProperty("login");
         String passwordValue = appProps.getProperty("password");
 
@@ -45,14 +46,14 @@ public abstract class BaseAppTest {
         button.click();
     }
 
-    private static Properties getAppProps() throws IOException {
-        String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("")).getPath();
-        String appConfigPath = rootPath + "resources.properties";
-        Properties appProps = new Properties();
-        appProps.load(new FileInputStream(appConfigPath));
-        //   File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("resources.properties")).getFile());
-        // Properties appProps = new Properties();
-        //  appProps.load(new FileInputStream(file));
-        return appProps;
-    }
+//    private static Properties getAppProps() throws IOException {
+//        String rootPath = Objects.requireNonNull(Thread.currentThread().getContextClassLoader().getResource("")).getPath();
+//        String appConfigPath = rootPath + "resources.properties";
+//        Properties appProps = new Properties();
+//        appProps.load(new FileInputStream(appConfigPath));
+//        //   File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("resources.properties")).getFile());
+//        // Properties appProps = new Properties();
+//        //  appProps.load(new FileInputStream(file));
+//        return appProps;
+//    }
 }
