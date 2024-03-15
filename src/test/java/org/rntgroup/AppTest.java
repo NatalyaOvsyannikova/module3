@@ -8,8 +8,10 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.PropertyReader;
 
 import java.time.Duration;
+import java.util.Properties;
 
 public class AppTest extends BaseAppTest
 {
@@ -23,13 +25,16 @@ public class AppTest extends BaseAppTest
 
    @Test(description ="Check_name")
    public void test2 () {
-      Wait<WebDriver> wait = new WebDriverWait(webDriver, Duration.ofSeconds(20));
+      Properties appProps = PropertyReader.readProperties();
+      String fullName = appProps.getProperty("fullName");
+      System.out.println(fullName);
+      Wait<WebDriver> wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
       WebElement profileButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button._text_1nnp8_152._button_1nnp8_1.AppHeader_navButton__MRJQD:nth-child(3)")));
       profileButton.click();
       WebElement nameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class,'ProfileView_personName')]")));
       String name = nameElement.getText();
       Assert.assertTrue(nameElement.isDisplayed(), "Full name not found");
-      Assert.assertTrue(name.contains("Овсянникова Наталья Николаевна"), "Incorrect name:" + nameElement.getText());
+      Assert.assertTrue(name.contains(fullName), "Incorrect name:" + nameElement.getText());
 
    }
 
@@ -41,7 +46,7 @@ public class AppTest extends BaseAppTest
       Assert.assertTrue(userInfoButton.isDisplayed(), "User info button not found");
 
       userInfoButton.click();
-      WebElement logoutLine = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.UserInfo_dropdownLine__96gf-")));
+      WebElement logoutLine = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class^='UserInfo_dropdownLine']")));
       Assert.assertTrue(logoutLine.isDisplayed(), "Logout not found");
 
       logoutLine.click();
