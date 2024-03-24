@@ -1,7 +1,9 @@
 package org.rntgroup.pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import org.testng.Assert;
@@ -16,21 +18,26 @@ public class MainPage extends BasePage{
 
     @FindBy (css = "div[class^='UserInfo_dropdownLine']")
     private WebElement logoutLine;
+    private Actions actions;
+    private JavascriptExecutor jsExecutor;
 
     public MainPage(WebDriver driver) {
         super(driver);
+        actions = new Actions(driver);
+        jsExecutor = (JavascriptExecutor) driver;
     }
 
     public MainPage clickProfileButton(){
         waitForElementDisplayed(profileButton);
-        profileButton.click();
+        jsExecutor.executeScript("arguments[0].click();", profileButton);
+        //actions.moveToElement(profileButton).click().perform();
         return this;
     }
 
     public MainPage clickUserInfoButton(){
         waitForElementDisplayed(userInfoButton);
         Assert.assertTrue(userInfoButton.isDisplayed(), "User info button not found");
-        userInfoButton.click();
+        actions.click(userInfoButton).perform();
         return this;
     }
 

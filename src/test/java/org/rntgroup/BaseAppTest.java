@@ -37,7 +37,7 @@ public abstract class BaseAppTest {
 
         LoginPage loginPage=new LoginPage(webDriver);
         loginPage.inputLoginViaJsExecutor(loginName)
-                .inputPassword(passwordValue)
+                .inputPasswordViaActions(passwordValue)
                 .clickLogin();
     }
 

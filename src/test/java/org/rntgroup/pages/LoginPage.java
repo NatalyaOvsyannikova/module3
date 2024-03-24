@@ -3,6 +3,7 @@ package org.rntgroup.pages;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -20,10 +21,12 @@ public class LoginPage extends BasePage{
     @FindBy (xpath = "//h1[starts-with(@class,'page-title')]")
     private WebElement signIn;
     private JavascriptExecutor jsExecutor;
+    private Actions actions;
 
     public LoginPage(WebDriver driver) {
         super(driver);
         jsExecutor = (JavascriptExecutor) driver;
+        actions = new Actions(driver);
     }
 
     public LoginPage inputLoginViaJsExecutor(String value){
@@ -33,8 +36,9 @@ public class LoginPage extends BasePage{
         return this;
     }
 
-    public LoginPage inputPassword (String value){
-        password.sendKeys(value);
+    public LoginPage inputPasswordViaActions (String value){
+        actions.sendKeys(password, value).perform();
+        //password.sendKeys(value);
         return this;
     }
 
