@@ -28,7 +28,9 @@ public class AppTest extends BaseAppTest
       mainPage.clickProfileButton();
 
       ProfilePage profilePage = new ProfilePage(webDriver);
-      profilePage.validateName(fullName);
+
+      Assert.assertTrue(profilePage.getName().isDisplayed(), "Full name not found");
+      Assert.assertTrue(profilePage.getName().getText().contains(fullName), "Incorrect name:" + profilePage.getName().getText());
    }
 
    @Test(description ="Logout")
@@ -42,7 +44,7 @@ public class AppTest extends BaseAppTest
       logoutWindow.clickLogoutButtonViaActions();
 
       LoginPage loginPage = new LoginPage(webDriver);
-      loginPage.validateSignIn("SIGN IN");
+      Assert.assertTrue(loginPage.getSignInText().contains("SIGN IN"), "Sign in is not displayed");
    }
 
 

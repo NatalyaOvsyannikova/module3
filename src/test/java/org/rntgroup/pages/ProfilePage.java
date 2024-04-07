@@ -3,7 +3,6 @@ package org.rntgroup.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 
 public class ProfilePage extends BasePage{
 
@@ -14,10 +13,8 @@ public class ProfilePage extends BasePage{
         super(driver);
     }
 
-    public ProfilePage validateName(String value){
-        Assert.assertTrue(nameElement.isDisplayed(), "Full name not found");
-        Assert.assertTrue(nameElement.getText().contains(value), "Incorrect name:" + nameElement.getText());
-        return this;
+    public WebElement getName(){
+       return nameElement;
     }
 
 }

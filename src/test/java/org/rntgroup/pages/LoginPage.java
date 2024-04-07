@@ -5,7 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
+import utils.PropertyReader;
+
+import java.io.IOException;
+import java.util.Properties;
 
 public class LoginPage extends BasePage{
 
@@ -46,9 +49,22 @@ public class LoginPage extends BasePage{
         clickLogin.click();
     }
 
-    public LoginPage validateSignIn (String value){
+    public String getSignInText (){
         waitForElementDisplayed(signIn);
-        Assert.assertTrue(signIn.getText().contains(value), "Sign in is not displayed");
-        return this;
+
+        return signIn.getText();
+    }
+
+    public static void authorization(WebDriver webDriver) throws IOException {
+        Properties appProps = PropertyReader.readProperties();
+        String loginName = appProps.getProperty("login");
+        String passwordValue = appProps.getProperty("password");
+
+        webDriver.get("https://hrp-test.app-test-001.nlmk.com/");
+
+        LoginPage loginPage=new LoginPage(webDriver);
+        loginPage.inputLoginViaJsExecutor(loginName)
+                .inputPasswordViaActions(passwordValue)
+                .clickLogin();
     }
 }
