@@ -1,11 +1,13 @@
 package org.rntgroup.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class ProfilePage extends BasePage{
-
+    private static final Logger logger= LogManager.getLogger(ProfilePage.class);
     @FindBy(xpath = "//div[starts-with(@class,'ProfileView_personName')]")
     private WebElement nameElement;
 
@@ -14,6 +16,7 @@ public class ProfilePage extends BasePage{
     }
 
     public WebElement getName(){
+       logger.debug("Get Full name");
        return nameElement;
     }
 

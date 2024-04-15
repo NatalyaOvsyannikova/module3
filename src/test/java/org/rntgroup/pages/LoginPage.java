@@ -1,5 +1,7 @@
 package org.rntgroup.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class LoginPage extends BasePage{
-
+    private static final Logger logger= LogManager.getLogger(LoginPage.class);
     @FindBy (id = "login")
     private WebElement login;
 
@@ -33,6 +35,7 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage inputLoginViaJsExecutor(String value){
+        logger.debug("Input Login {}", value);
         waitForElementDisplayed(login);
         String script = "arguments[0].setAttribute('value',arguments[1])";
         jsExecutor.executeScript(script, login, value);
@@ -40,18 +43,20 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage inputPasswordViaActions (String value){
+        logger.debug("Input Password {}", value);
         actions.sendKeys(password, value).perform();
         //password.sendKeys(value);
         return this;
     }
 
     public void clickLogin (){
+        logger.debug("Click Login");
         clickLogin.click();
     }
 
     public String getSignInText (){
+        logger.debug("get Sign In text");
         waitForElementDisplayed(signIn);
-
         return signIn.getText();
     }
 

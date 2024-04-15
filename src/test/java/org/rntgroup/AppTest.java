@@ -1,5 +1,7 @@
 package org.rntgroup;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.rntgroup.pages.LoginPage;
 import org.rntgroup.pages.LogoutWindow;
 import org.rntgroup.pages.MainPage;
@@ -12,14 +14,17 @@ import java.util.Properties;
 
 public class AppTest extends BaseAppTest
 {
+   private static final Logger logger= LogManager.getLogger(AppTest.class);
    @Test(description ="Check_title")
     public void test1 () {
+       logger.debug("Test 1");
        String title = webDriver.getTitle();
        Assert.assertTrue(title.contains("HR Portal"), "Title is incorrect");
    }
 
    @Test(description ="Check_name")
    public void test2 () {
+      logger.debug("Test 2");
       Properties appProps = PropertyReader.readProperties();
       String fullName = appProps.getProperty("fullName");
       System.out.println(fullName);
@@ -35,7 +40,7 @@ public class AppTest extends BaseAppTest
 
    @Test(description ="Logout")
    public void test3 () {
-
+      logger.debug("Test 3");
       MainPage mainPage = new MainPage(webDriver);
       mainPage.clickUserInfoButton()
               .clickLogoutLine();
