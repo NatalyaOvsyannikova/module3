@@ -20,8 +20,7 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.4.0</version>
-      <scope>test</scope>
+      <version>7.9.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -54,6 +53,7 @@
       <artifactId>selenium-java</artifactId>
       <version>4.18.1</version>
     </dependency>
+
   </dependencies>
   <build>
     <plugins>
@@ -62,14 +62,10 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
         <configuration>
-          <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/
-            1.9.21/aspectjweaver-1.9.21.jar"</argLine>
-          <systemProperties>
-            <property>
-              <name>allure.results.directory</name>
-              <value>${project.build.directory}/allure-results</value>
-            </property>
-          </systemProperties>
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"
+          </argLine>
+
         </configuration>
         <dependencies>
           <dependency>
@@ -85,7 +81,7 @@
         <version>2.12.0</version>
         <configuration>
           <reportVersion>2.12.0</reportVersion>
-          <outputDirectory>${basedir}/target/allure-reports/</outputDirectory>
+          <outputDirectory>${basedir}/target/allure-results/</outputDirectory>
         </configuration>
       </plugin>
     </plugins>

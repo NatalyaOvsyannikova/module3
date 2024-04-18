@@ -7,11 +7,12 @@ import org.rntgroup.pages.LogoutWindow;
 import org.rntgroup.pages.MainPage;
 import org.rntgroup.pages.ProfilePage;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.PropertyReader;
 
 import java.util.Properties;
-
+@Listeners ({FailedTestListener.class})
 public class AppTest extends BaseAppTest
 {
    private static final Logger logger= LogManager.getLogger(AppTest.class);
