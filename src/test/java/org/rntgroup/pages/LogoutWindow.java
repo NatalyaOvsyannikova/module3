@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.rntgroup.AllureLogger;
 import org.testng.Assert;
 
 public class LogoutWindow extends BasePage{
@@ -19,7 +20,7 @@ public class LogoutWindow extends BasePage{
     }
 
     public LogoutWindow clickLogoutButtonViaActions(){
-        logger.debug("Click Logout");
+        AllureLogger.debug("Click Logout");
         waitForElementDisplayed(logoutButton);
         Assert.assertTrue(logoutButton.isDisplayed(), "Logout button not found");
         actions.moveToElement(logoutButton).click().perform();

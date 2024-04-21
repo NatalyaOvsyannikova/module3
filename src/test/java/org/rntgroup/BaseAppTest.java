@@ -24,7 +24,7 @@ public abstract class BaseAppTest {
     private static final Logger logger= LogManager.getLogger(BaseAppTest.class);
     @BeforeClass(alwaysRun = true)
     public void setUp(ITestContext context) throws IOException {
-        logger.info("Set Up");
+        AllureLogger.info("Set Up");
         // Установка удаленного URL-адреса удаленного сервера Selenium Grid или облачного провайдера
         //URL remoteUrl = new URL("http://localhost:4444");
 
@@ -49,7 +49,7 @@ public abstract class BaseAppTest {
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        logger.info("Clean Up");
+        AllureLogger.info("Clean Up");
         webDriver.quit();
     }
 

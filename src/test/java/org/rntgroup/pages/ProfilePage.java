@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.rntgroup.AllureLogger;
 
 public class ProfilePage extends BasePage{
     private static final Logger logger= LogManager.getLogger(ProfilePage.class);
@@ -16,7 +17,7 @@ public class ProfilePage extends BasePage{
     }
 
     public WebElement getName(){
-       logger.debug("Get Full name");
+       AllureLogger.debug("Get Full name");
        return nameElement;
     }
 

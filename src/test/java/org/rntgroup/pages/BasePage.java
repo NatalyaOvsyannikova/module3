@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.rntgroup.AllureLogger;
 import org.rntgroup.AppTest;
 
 import java.time.Duration;
@@ -16,7 +17,7 @@ public class BasePage {
     protected WebDriver driver;
 
     public BasePage (WebDriver driver){
-        logger.info("Init driver");
+        AllureLogger.info("Init driver");
         this.driver=driver;
         PageFactory.initElements(driver, this);
     }

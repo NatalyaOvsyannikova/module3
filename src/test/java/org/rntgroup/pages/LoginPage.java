@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.rntgroup.AllureLogger;
 import utils.PropertyReader;
 
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage inputLoginViaJsExecutor(String value){
-        logger.debug("Input Login {}", value);
+        AllureLogger.debug("Input Login " + value);
         waitForElementDisplayed(login);
         String script = "arguments[0].setAttribute('value',arguments[1])";
         jsExecutor.executeScript(script, login, value);
@@ -43,19 +44,19 @@ public class LoginPage extends BasePage{
     }
 
     public LoginPage inputPasswordViaActions (String value){
-        logger.debug("Input Password {}", value);
+        AllureLogger.debug("Input Password");
         actions.sendKeys(password, value).perform();
         //password.sendKeys(value);
         return this;
     }
 
     public void clickLogin (){
-        logger.debug("Click Login");
+        AllureLogger.debug("Click Login");
         clickLogin.click();
     }
 
     public String getSignInText (){
-        logger.debug("get Sign In text");
+        AllureLogger.debug("get Sign In text");
         waitForElementDisplayed(signIn);
         return signIn.getText();
     }
