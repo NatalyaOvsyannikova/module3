@@ -14,7 +14,7 @@ import org.testng.Assert;
 
 public class MainPage extends BasePage{
     private static final Logger logger= LogManager.getLogger(MainPage.class);
-    @FindBy (css = "div[class^='AppHeader_mobile__navigation']>button:nth-child(3)")
+    @FindBy (css = "div[class^='AppHeader_profile__left']")
     private WebElement profileButton;
 
     @FindBy (xpath = "//div[starts-with(@class,'UserInfo_dropdown')]")

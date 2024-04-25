@@ -40,9 +40,9 @@ public abstract class BaseAppTest {
 
         webDriver = new ChromeDriver();
         context.setAttribute("WebDriver", webDriver);
-        //webDriver.manage()
-        //        .timeouts()
-        //        .implicitlyWait(Duration.ofSeconds(10));
+        webDriver.manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(10));
 
         authorization(webDriver);
     }
