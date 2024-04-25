@@ -11,13 +11,12 @@ public class FailedTestListener implements IInvokedMethodListener {
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult result) {
         ITestContext context = result.getTestContext();
-        if (method.isTestMethod()) {
-            if (!result.isSuccess()) {
-                WebDriver driver = (WebDriver) context.getAttribute("WebDriver");
-                makePicture(driver);
-                String methodName = result.getMethod().getConstructorOrMethod().getName();
-                saveTextLog(methodName + " failed and screenshot attached to the report!");
-            }
+
+        if (!result.isSuccess() & method.isTestMethod()) {
+            WebDriver driver = (WebDriver) context.getAttribute("WebDriver");
+            makePicture(driver);
+            String methodName = result.getMethod().getConstructorOrMethod().getName();
+            saveTextLog(methodName + " failed and screenshot attached to the report!");
         }
     }
 
