@@ -1,23 +1,23 @@
-package org.rntgroup;
+package org.rntgroup.tests;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.rntgroup.framework.business.User;
+import org.rntgroup.framework.utils.PropertyReader;
+import org.rntgroup.framework.listeners.FailedTestListener;
+import org.rntgroup.framework.logger.AllureLogger;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.Duration;
+import java.util.Properties;
 
-import static org.rntgroup.pages.LoginPage.authorization;
+import static org.rntgroup.framework.pages.LoginPage.authorization;
 @Listeners({FailedTestListener.class})
 public abstract class BaseAppTest {
     WebDriver webDriver;
@@ -44,7 +44,9 @@ public abstract class BaseAppTest {
                 .timeouts()
                 .implicitlyWait(Duration.ofSeconds(10));
 
-        authorization(webDriver);
+        Properties appProps = PropertyReader.readProperties();
+        User user = new User(appProps.getProperty("login"), appProps.getProperty("password"));
+        authorization(webDriver, user.getLogin(), user.getPassword());
     }
 
     @AfterClass(alwaysRun = true)

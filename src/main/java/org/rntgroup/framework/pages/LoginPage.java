@@ -1,14 +1,15 @@
-package org.rntgroup.pages;
+package org.rntgroup.framework.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.rntgroup.framework.business.User;
+import org.rntgroup.framework.utils.PropertyReader;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.rntgroup.AllureLogger;
-import utils.PropertyReader;
+import org.rntgroup.framework.logger.AllureLogger;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -61,10 +62,7 @@ public class LoginPage extends BasePage{
         return signIn.getText();
     }
 
-    public static void authorization(WebDriver webDriver) throws IOException {
-        Properties appProps = PropertyReader.readProperties();
-        String loginName = appProps.getProperty("login");
-        String passwordValue = appProps.getProperty("password");
+    public static void authorization(WebDriver webDriver, String loginName, String passwordValue) throws IOException {
 
         webDriver.get("https://hrp-test.app-test-001.nlmk.com/");
 

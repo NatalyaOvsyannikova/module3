@@ -1,4 +1,4 @@
-package org.rntgroup;
+package org.rntgroup.framework.listeners;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;

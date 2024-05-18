@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="HR Portal Test">
     <listeners>
-        <listener class-name="org.rntgroup.FailedTestListener"/>
+        <listener class-name="org.rntgroup.framework.listeners.FailedTestListener"/>
     </listeners>
     <test name="HR Portal Test">
         <classes>
-            <class name="org.rntgroup.AppTest"/>
+            <class name="org.rntgroup.tests.AppTest"/>
         </classes>
     </test>
 </suite>

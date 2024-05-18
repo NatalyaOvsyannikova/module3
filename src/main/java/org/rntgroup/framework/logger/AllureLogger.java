@@ -1,4 +1,4 @@
-package org.rntgroup;
+package org.rntgroup.framework.logger;
 
 import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;

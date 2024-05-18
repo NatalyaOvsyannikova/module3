@@ -1,4 +1,4 @@
-package org.rntgroup.pages;
+package org.rntgroup.framework.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-import org.rntgroup.AllureLogger;
-import org.rntgroup.AppTest;
+import org.rntgroup.framework.logger.AllureLogger;
 import org.testng.Assert;
 
 public class MainPage extends BasePage{
@@ -17,11 +16,8 @@ public class MainPage extends BasePage{
     @FindBy (css = "div[class^='AppHeader_profile__left']")
     private WebElement profileButton;
 
-    @FindBy (xpath = "//div[starts-with(@class,'UserInfo_dropdown')]")
-    private WebElement userInfoButton;
-
-    @FindBy (css = "div[class^='UserInfo_dropdownLine']")
-    private WebElement logoutLine;
+    @FindBy (xpath = "//button[starts-with(@class,'_grey-clear')]")
+    private WebElement logout;
     private Actions actions;
     private JavascriptExecutor jsExecutor;
 
@@ -39,19 +35,12 @@ public class MainPage extends BasePage{
         return this;
     }
 
-    public MainPage clickUserInfoButton(){
-        AllureLogger.debug("Open User info menu");
-        waitForElementDisplayed(userInfoButton);
-        Assert.assertTrue(userInfoButton.isDisplayed(), "User info button not found");
-        actions.click(userInfoButton).perform();
-        return this;
-    }
 
-    public MainPage clickLogoutLine(){
+    public MainPage clickLogoutButton(){
         AllureLogger.debug("Click on Logout");
-        waitForElementDisplayed(logoutLine);
-        Assert.assertTrue(logoutLine.isDisplayed(), "Logout not found");
-        logoutLine.click();
+        waitForElementDisplayed(logout);
+        Assert.assertTrue(logout.isDisplayed(), "Logout not found");
+        logout.click();
         return this;
     }
 }
