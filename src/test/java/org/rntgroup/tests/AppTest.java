@@ -10,6 +10,7 @@ import org.rntgroup.framework.pages.LoginPage;
 import org.rntgroup.framework.pages.LogoutWindow;
 import org.rntgroup.framework.pages.MainPage;
 import org.rntgroup.framework.pages.ProfilePage;
+import org.rntgroup.framework.patterns.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -33,10 +34,10 @@ public class AppTest extends BaseAppTest
       Properties appProps = PropertyReader.readProperties();
       Employee employee = new Employee(appProps.getProperty("fullName"), "На работе", appProps.getProperty("birthday"));
 
-      MainPage mainPage = new MainPage(webDriver);
+      MainPage mainPage = PageFactory.createPage("MainPage",webDriver);
       mainPage.clickProfileButton();
 
-      ProfilePage profilePage = new ProfilePage(webDriver);
+      ProfilePage profilePage = PageFactory.createPage("ProfilePage", webDriver);
 
       Assert.assertTrue(profilePage.getNameElement().isDisplayed(), "Full name not found");
       Assert.assertTrue(profilePage.getNameElement().getText().contains(employee.getFullName()), "Incorrect name:" + profilePage.getNameElement().getText());
@@ -52,13 +53,13 @@ public class AppTest extends BaseAppTest
    @Test(description ="Logout")
    public void test3 () {
       AllureLogger.debug("Test 3");
-      MainPage mainPage = new MainPage(webDriver);
+      MainPage mainPage = PageFactory.createPage("MainPage",webDriver);
       mainPage.clickLogoutButton();
 
-      LogoutWindow logoutWindow = new LogoutWindow(webDriver);
+      LogoutWindow logoutWindow = PageFactory.createPage("LogoutWindow",webDriver);
       logoutWindow.clickLogoutButtonViaActions();
 
-      LoginPage loginPage = new LoginPage(webDriver);
+      LoginPage loginPage = PageFactory.createPage("LoginPage",webDriver);
       Assert.assertTrue(loginPage.getSignInText().contains("SIGN IN"), "Sign in is not displayed");
    }
 

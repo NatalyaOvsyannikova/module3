@@ -3,8 +3,8 @@ package org.rntgroup.tests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.rntgroup.framework.business.User;
+import org.rntgroup.framework.patterns.WebDriverSingleton;
 import org.rntgroup.framework.utils.PropertyReader;
 import org.rntgroup.framework.listeners.FailedTestListener;
 import org.rntgroup.framework.logger.AllureLogger;
@@ -38,8 +38,9 @@ public abstract class BaseAppTest {
         // Создание экземпляра RemoteWebDriver с указанными удаленным URL-адресом и capabilities
         //webDriver = new RemoteWebDriver(remoteUrl, desiredCapabilities);
 
-        webDriver = new ChromeDriver();
+        webDriver = WebDriverSingleton.getDriver();
         context.setAttribute("WebDriver", webDriver);
+        webDriver.manage().window().maximize();
         webDriver.manage()
                 .timeouts()
                 .implicitlyWait(Duration.ofSeconds(10));
