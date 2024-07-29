@@ -3,7 +3,7 @@ package org.rntgroup.tests;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.rntgroup.framework.business.Employee;
-import org.rntgroup.framework.business.User;
+
 import org.rntgroup.framework.listeners.FailedTestListener;
 import org.rntgroup.framework.logger.AllureLogger;
 import org.rntgroup.framework.pages.LoginPage;
@@ -34,10 +34,10 @@ public class AppTest extends BaseAppTest
       Properties appProps = PropertyReader.readProperties();
       Employee employee = new Employee(appProps.getProperty("fullName"), "На работе", appProps.getProperty("birthday"));
 
-      MainPage mainPage = PageFactory.createPage("MainPage",webDriver);
+      MainPage mainPage = PageFactory.createPage(MainPage.class,webDriver);
       mainPage.clickProfileButton();
 
-      ProfilePage profilePage = PageFactory.createPage("ProfilePage", webDriver);
+      ProfilePage profilePage = PageFactory.createPage(ProfilePage.class, webDriver);
 
       Assert.assertTrue(profilePage.getNameElement().isDisplayed(), "Full name not found");
       Assert.assertTrue(profilePage.getNameElement().getText().contains(employee.getFullName()), "Incorrect name:" + profilePage.getNameElement().getText());
@@ -53,13 +53,13 @@ public class AppTest extends BaseAppTest
    @Test(description ="Logout")
    public void test3 () {
       AllureLogger.debug("Test 3");
-      MainPage mainPage = PageFactory.createPage("MainPage",webDriver);
+      MainPage mainPage = PageFactory.createPage(MainPage.class,webDriver);
       mainPage.clickLogoutButton();
 
-      LogoutWindow logoutWindow = PageFactory.createPage("LogoutWindow",webDriver);
+      LogoutWindow logoutWindow = PageFactory.createPage(LogoutWindow.class,webDriver);
       logoutWindow.clickLogoutButtonViaActions();
 
-      LoginPage loginPage = PageFactory.createPage("LoginPage",webDriver);
+      LoginPage loginPage = PageFactory.createPage(LoginPage.class,webDriver);
       Assert.assertTrue(loginPage.getSignInText().contains("SIGN IN"), "Sign in is not displayed");
    }
 
